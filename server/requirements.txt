@@ -1,0 +1,4 @@
+flask
+flask-cors
+sumy
+nltk  # required by sumy tokenizers
