@@ -1,7 +1,7 @@
 # server/app.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from summarizer import summarize_text
+from failedsummerizor.server.summarizer import summarize_text
 
 app = Flask(__name__)
 CORS(app)
