@@ -20,7 +20,13 @@ def summarize_text(text, method="textrank", ratio=0.3, language="english"):
     summarizer = summarizer_class(stemmer)
     summarizer.stop_words = get_stop_words(language)
 
-    sentences = summarizer(parser.d sentences_count=None)
-    # sumy returns Sentence objects, join them
-    summary = " ".join(str(s) for s in sentences[:max(1, int(len(sentences) * ratio))])
-    return summary else text  # fallback to full text if empty
+    sentences = summarizer(parser.document, sentences_count=None)
+    # Extract the sentence texts
+    summary_sentences = []
+    for sentence in sentences:
+        summary_sentences.append(str(sentence))
+    
+    # Calculate how many sentences to include based on ratio
+    num_sentences = max(1, int(len(summary_sentences) * ratio))
+    summary = ' '.join(summary_sentences[:num_sentences])
+    return summary
