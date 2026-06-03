@@ -1,87 +1,150 @@
-```javascript
-const worker =
-new Worker(
-    "workers/nlp.worker.js"
-);
-
 const memoryBox =
-document.getElementById(
-    "memory"
-);
+document.getElementById("memory");
 
 const questionBox =
-document.getElementById(
-    "question"
-);
+document.getElementById("question");
 
 const output =
-document.getElementById(
-    "output"
-);
+document.getElementById("output");
 
 const status =
-document.getElementById(
-    "status"
-);
+document.getElementById("status");
+
+// SAVE
 
 document
 .getElementById("saveButton")
 .onclick = () => {
 
-    saveMemory(
+    localStorage.setItem(
+        "school_memory",
         memoryBox.value
     );
 
     status.innerText =
-    "Notes saved locally.";
+    "Saved.";
 };
+
+// LOAD
 
 document
 .getElementById("loadButton")
 .onclick = () => {
 
     memoryBox.value =
-    loadMemory();
+    localStorage.getItem(
+        "school_memory"
+    ) || "";
 
     status.innerText =
-    "Notes loaded.";
+    "Loaded.";
 };
+
+// CLEAR
 
 document
 .getElementById("clearButton")
 .onclick = () => {
 
-    clearMemory();
-
     memoryBox.value = "";
 
+    output.innerText = "";
+
+    localStorage.removeItem(
+        "school_memory"
+    );
+
     status.innerText =
-    "Memory cleared.";
+    "Cleared.";
 };
+
+// ASK AI
 
 document
 .getElementById("askButton")
 .onclick = () => {
 
-    status.innerText =
-    "Processing...";
+    const memory =
+    memoryBox.value;
 
-    worker.postMessage({
+    const question =
+    questionBox.value;
 
-        memory:
-        memoryBox.value,
+    if (
+        memory.trim() === ""
+    ) {
 
-        question:
-        questionBox.value
+        output.innerText =
+        "Paste some notes first.";
+
+        return;
+    }
+
+    if (
+        question
+        .toLowerCase()
+        .includes("summary")
+    ) {
+
+        const sentences =
+        memory.split(".");
+
+        output.innerText =
+        sentences
+        .slice(0, 5)
+        .join(". ");
+
+        return;
+    }
+
+    const lines =
+    memory.split("\n");
+
+    const words =
+    question
+    .toLowerCase()
+    .split(" ");
+
+    let matches = [];
+
+    lines.forEach((line) => {
+
+        let score = 0;
+
+        words.forEach((word) => {
+
+            if (
+                line
+                .toLowerCase()
+                .includes(word)
+            ) {
+
+                score++;
+
+            }
+
+        });
+
+        if (score > 0) {
+
+            matches.push(line);
+
+        }
+
     });
+
+    if (matches.length === 0) {
+
+        output.innerText =
+        "No matches found.";
+
+    }
+
+    else {
+
+        output.innerText =
+        matches.join("\n\n");
+
+    }
+
 };
-
-worker.onmessage =
-function(event) {
-
-    status.innerText = "";
-
-    output.innerText =
-    event.data;
-};
-```

@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,67 +19,35 @@ href="style.css">
 
 <div class="app">
 
-    <header>
+<h1>AI School Help</h1>
 
-        <h1>AI School Help</h1>
+<textarea
+id="memory"
+placeholder="Paste notes here..."></textarea>
 
-        <p>
-            Local browser AI assistant
-        </p>
+<textarea
+id="question"
+placeholder="Ask a question..."></textarea>
 
-    </header>
+<button id="saveButton">
+Save Notes
+</button>
 
-    <section class="panel">
+<button id="loadButton">
+Load Notes
+</button>
 
-        <label>
-            Study Material
-        </label>
+<button id="clearButton">
+Clear
+</button>
 
-        <textarea
-        id="memory"
-        placeholder="Paste notes, assignments, emails, or study material here..."></textarea>
+<button id="askButton">
+Ask AI
+</button>
 
-        <div class="controls">
+<div id="status"></div>
 
-            <button id="saveButton">
-                Save Notes
-            </button>
-
-            <button id="loadButton">
-                Load Notes
-            </button>
-
-            <button id="clearButton">
-                Clear
-            </button>
-
-        </div>
-
-    </section>
-
-    <section class="panel">
-
-        <label>
-            Ask Question
-        </label>
-
-        <textarea
-        id="question"
-        placeholder="Ask a question..."></textarea>
-
-        <button id="askButton">
-            Ask AI
-        </button>
-
-    </section>
-
-    <section class="panel">
-
-        <div id="status"></div>
-
-        <div id="output"></div>
-
-    </section>
+<div id="output"></div>
 
 </div>
 
@@ -90,4 +57,3 @@ href="style.css">
 
 </body>
 </html>
-```
