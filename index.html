@@ -1,63 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
-<meta charset="UTF-8">
+    <title>Email AI</title>
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>AI School Help</title>
-
-<link rel="stylesheet"
-href="style.css">
+    <link rel="stylesheet"
+          href="style.css">
 
 </head>
 
 <body>
 
-<div class="app">
+    <div class="container">
 
-<h1>AI School Help</h1>
+        <h1>Email + Docs AI</h1>
 
-<textarea
-id="memory"
-placeholder="Paste notes here..."></textarea>
+        <p>
+            Paste emails or docs below.
+        </p>
 
-<textarea
-id="question"
-placeholder="Ask a question..."></textarea>
+        <textarea id="memory"
+        placeholder="Paste emails or docs here..."></textarea>
 
-<button id="saveButton">
-Save Notes
-</button>
+        <textarea id="question"
+        placeholder="Ask a question..."></textarea>
 
-<button id="loadButton">
-Load Notes
-</button>
+        <button id="askButton">
+            Ask AI
+        </button>
 
-<button id="clearButton">
-Clear
-</button>
+        <div id="output"></div>
 
-<button id="askButton">
-Ask AI
-</button>
+    </div>
 
-<button onclick="alert('JS WORKS')">
-Test JS
-</button>
-
-<div id="status"></div>
-
-<div id="output"></div>
-
-</div>
-
-<script src="storage.js"></script>
-<script src="engine.js"></script>
-<script src="ui.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
