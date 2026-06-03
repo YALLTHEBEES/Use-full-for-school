@@ -1,40 +1,93 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-    <title>Email AI</title>
+<meta charset="UTF-8">
 
-    <link rel="stylesheet"
-          href="style.css">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>AI School Help</title>
+
+<link rel="stylesheet"
+href="style.css">
 
 </head>
 
 <body>
 
-    <div class="container">
+<div class="app">
 
-        <h1>Email + Docs AI</h1>
+    <header>
+
+        <h1>AI School Help</h1>
 
         <p>
-            Paste emails or docs below.
+            Local browser AI assistant
         </p>
 
-        <textarea id="memory"
-        placeholder="Paste emails or docs here..."></textarea>
+    </header>
 
-        <textarea id="question"
+    <section class="panel">
+
+        <label>
+            Study Material
+        </label>
+
+        <textarea
+        id="memory"
+        placeholder="Paste notes, assignments, emails, or study material here..."></textarea>
+
+        <div class="controls">
+
+            <button id="saveButton">
+                Save Notes
+            </button>
+
+            <button id="loadButton">
+                Load Notes
+            </button>
+
+            <button id="clearButton">
+                Clear
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="panel">
+
+        <label>
+            Ask Question
+        </label>
+
+        <textarea
+        id="question"
         placeholder="Ask a question..."></textarea>
 
         <button id="askButton">
             Ask AI
         </button>
 
+    </section>
+
+    <section class="panel">
+
+        <div id="status"></div>
+
         <div id="output"></div>
 
-    </div>
+    </section>
 
-    <script src="script.js"></script>
+</div>
+
+<script src="storage.js"></script>
+<script src="engine.js"></script>
+<script src="ui.js"></script>
 
 </body>
 </html>
+```
