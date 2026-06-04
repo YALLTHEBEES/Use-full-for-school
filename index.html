@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Due Date Tracker</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="layout">
+
+    <!-- Left sidebar with nav + stats -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="logo">
+          <span class="logo-icon">◷</span>
+          <span class="logo-text">deadlines</span>
+        </div>
+        <nav class="nav">
+          <button class="nav-btn active" data-view="active">Active</button>
+          <button class="nav-btn" data-view="completed">Completed</button>
+          <button class="nav-btn" data-view="archive">Archive</button>
+        </nav>
+      </div>
+      <div class="stats-panel" id="stats-panel">
+        <div class="stat"><span class="stat-num" id="s-overdue">—</span><span class="stat-label">overdue</span></div>
+        <div class="stat"><span class="stat-num" id="s-today">—</span><span class="stat-label">today</span></div>
+        <div class="stat"><span class="stat-num" id="s-week">—</span><span class="stat-label">this week</span></div>
+        <div class="stat"><span class="stat-num" id="s-done">—</span><span class="stat-label">done</span></div>
+      </div>
+    </aside>
+
+    <!-- Main content area -->
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1 id="view-title">Active Tasks</h1>
+          <span class="today-pill" id="today-pill">{{ today }}</span>
+        </div>
+        <button class="btn-primary" id="open-add">+ New Task</button>
+      </header>
+
+      <!-- Natural language search bar -->
+      <div class="query-row">
+        <input type="text" id="query-input" class="query-input"
+               placeholder='Ask: "what is overdue?" · "most urgent" · "due this week"' />
+        <button class="btn-ask" id="run-query">Ask</button>
+      </div>
+
+      <!-- Quick shortcut buttons -->
+      <div class="quick-chips">
+        <button class="chip" data-q="overdue">⚠ overdue</button>
+        <button class="chip" data-q="due today">📅 today</button>
+        <button class="chip" data-q="due this week">📆 this week</button>
+        <button class="chip" data-q="most urgent">🔥 most urgent</button>
+        <button class="chip" data-q="due next month">🗓 next month</button>
+        <button class="chip" data-q="all tasks">📋 all</button>
+        <button class="chip" data-q="last month">🗂 last 30 days</button>
+      </div>
+
+      <!-- Summary text shown after a query -->
+      <div id="summary-bar" class="summary-bar hidden"></div>
+
+      <!-- Task cards go here, filled in by JavaScript -->
+      <div class="task-list" id="task-list"></div>
+    </main>
+  </div>
+
+  <!-- Add Task pop-up modal -->
+  <div class="modal-overlay hidden" id="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>New Task</h2>
+        <button class="modal-close" id="close-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="field">
+          <label>Task name *</label>
+          <input type="text" id="f-name" placeholder="e.g. Submit quarterly report" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Due date *</label>
+            <input type="date" id="f-date" value="{{ today }}" />
+          </div>
+          <div class="field">
+            <label>Category</label>
+            <select id="f-cat">
+              <option value="general">General</option>
+              <option value="work">Work</option>
+              <option value="personal">Personal</option>
+              <option value="finance">Finance</option>
+              <option value="health">Health</option>
+              <option value="school">School</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Notes</label>
+          <textarea id="f-notes" rows="2" placeholder="Optional details..."></textarea>
+        </div>
+        <button class="btn-primary full" id="save-task">Save Task</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
